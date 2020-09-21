@@ -1,4 +1,4 @@
-import modules
+import modules.core as core
 
 # Part 1
 # TODO: Add input
@@ -14,7 +14,7 @@ import modules
 
 
 def main():
-    pass
+    core.LibShell().cmdloop()
 
 
 if __name__ == '__main__':
