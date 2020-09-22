@@ -1,6 +1,6 @@
 import cmd
 import lib_class
-from other import write_to_file, read_from_file, write_to_json  
+from other import write_to_file, read_from_file, write_to_json
 
 
 class LibShell(cmd.Cmd):
@@ -22,9 +22,15 @@ class LibShell(cmd.Cmd):
         'Add a Movie to the library\nArguments: title director length purchase_price purchase_year degree_of_wear'
         self.my_library.add_movie(*parse(arg))
 
+    def do_update_value(self, arg):
+        self.my_library.update_current_value()
+
     def do_save(self, arg):
         'This will save the data in library to files'
         write_to_json(self.my_library)
+
+    def do_load(self, arg):
+        self.populate()
 
     def do_show_all(self, arg):
         'Print out the entire content of the library'
@@ -32,16 +38,16 @@ class LibShell(cmd.Cmd):
 
     def do_debug(self, arg):
         'This is a debug option to populate the library with random data'
-        self.my_library.add_book('freg', 'derg', 23, 123, 2014)
-        self.my_library.add_book('sdf', 'fsa', 45, 43, 567)
-        self.my_library.add_book('hyt', 'bgty', 5, 23, 2019)
-        self.my_library.add_book('dswei', 'mnbv', 6, 98, 2012)
-        self.my_library.add_book('saser', 'dzxrt', 8, 1, 2015)
-        self.my_library.add_cd('wololo', 'derpington', 13, 108, 67)
-        self.my_library.add_cd('gtre', 'lpoi', 6, 56, 309)
-        self.my_library.add_cd('xcvpoi', 'njiuugh', 7, 7, 7)
-        self.my_library.add_cd('johan', 'david', 4, 34, 123)
-        self.my_library.add_cd('nicklas', 'magnis', 23, 48, 432)
+        self.my_library.add_book('a Book', 'g author', 23, 123, 2014)
+        self.my_library.add_book('d Book', 'f author', 45, 43, 567)
+        self.my_library.add_book('h Book', 'b author', 5, 23, 2019)
+        self.my_library.add_book('b Book', 'm author', 6, 98, 2012)
+        self.my_library.add_book('i Book', 'd author', 8, 1, 2015)
+        self.my_library.add_cd('w cd', 'd artist', 13, 108, 67)
+        self.my_library.add_cd('g cd', 'l artist', 6, 56, 309)
+        self.my_library.add_cd('x cd', 'n artist', 7, 7, 7)
+        self.my_library.add_cd('j cd', 'j artist', 4, 34, 123)
+        self.my_library.add_cd('n cd', 'a artist', 23, 48, 432)
         self.my_library.add_movie('good one', 'gustav', 156, 123, 2019, 10)
         self.my_library.add_movie('decent one', 'davidsson', 120, 230, 2015, 7)
         self.my_library.add_movie('eehh', 'matsumoto', 99, 98, 2012, 5)
@@ -51,6 +57,31 @@ class LibShell(cmd.Cmd):
     def do_quit(self, *arg):
         'Exit the Program'
         return True
+
+    def populate(self):
+        data = read_from_file()
+        for key in data:
+            for row in data[key]:
+                if key == 'books':
+                    self.my_library.add_book(row['title'],
+                                             row['author'],
+                                             row['page_count'],
+                                             row['purchase_price'],
+                                             row['purchase_year'])
+                elif key == 'movies':
+                    self.my_library.add_movie(row['title'],
+                                              row['director'],
+                                              row['length'],
+                                              row['purchase_price'],
+                                              row['purchase_year'],
+                                              row['degree_of_wear'])
+                elif key == 'music_cds':
+                    self.my_library.add_cd(row['title'],
+                                           row['artist'],
+                                           row['track_count'],
+                                           row['length'],
+                                           row['purchase_price'])
+        self.my_library.update_current_value()
 
     def precmd(self, line):
         line = line.lower()

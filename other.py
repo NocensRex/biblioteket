@@ -31,5 +31,8 @@ def write_to_json(data):
         json.dump(temp_dict, f, indent=4, sort_keys=True)
 
 
-def read_from_file(filename):
-    pass
+def read_from_file():
+    with open('data/test.json', 'r') as f:
+        import_dict = json.load(f)
+
+    return import_dict
