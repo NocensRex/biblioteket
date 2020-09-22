@@ -1,5 +1,6 @@
 import cmd
 import lib_class
+from other import write_to_file, read_from_file, write_to_json  
 
 
 class LibShell(cmd.Cmd):
@@ -20,6 +21,10 @@ class LibShell(cmd.Cmd):
     def do_add_movie(self, arg):
         'Add a Movie to the library\nArguments: title director length purchase_price purchase_year degree_of_wear'
         self.my_library.add_movie(*parse(arg))
+
+    def do_save(self, arg):
+        'This will save the data in library to files'
+        write_to_json(self.my_library)
 
     def do_show_all(self, arg):
         'Print out the entire content of the library'
