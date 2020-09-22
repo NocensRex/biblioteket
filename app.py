@@ -12,6 +12,9 @@ import core
 # Part 3
 # TODO: Make it possible to sort data in different ways
 
+# Part 4
+# TODO: Docstring for everything
+
 
 def main():
     core.LibShell().cmdloop()
