@@ -6,8 +6,8 @@ import core
 # DONE: Print everything
 
 # Part 2
-# TODO: Save all data to a file when program closes
-# TODO: When program starts check if a file with data exists and load it
+# DONE: Save all data to a file when program closes
+# DONE: When program starts check if a file with data exists and load it
 
 # Part 3
 # TODO: Make it possible to sort data in different ways
