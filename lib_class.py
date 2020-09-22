@@ -1,4 +1,5 @@
 from mediatype import Book, Movie, Music_CD
+from pandas import DataFrame
 
 
 class Lib():
@@ -18,11 +19,23 @@ class Lib():
 
     def print_lib(self):
         print('\nBooks:')
+        temp = []
         for book in self.books:
-            print(book.title)
+            temp.append((book.title, book.author, book.page_count, book.purchase_price, book.purchase_year))
+        df = DataFrame(temp, columns=['Title', 'Author', 'Page Count', 'Purchase Price', 'Purchase Year'])
+        df = df.set_index('Title')
+        print(df)
         print('\nMovies:')
+        temp = []
         for movie in self.movies:
-            print(movie.title)
+            temp.append((movie.title, movie.director, movie.length, movie.purchase_price, movie.purchase_year, movie.degree_of_wear))
+        df = DataFrame(temp, columns=['Title', 'Director', 'Length', 'Purchase Price', 'Purchase Year', 'Degree of wear'])
+        df = df.set_index('Title')
+        print(df)
         print('\nMusic CDs:')
+        temp = []
         for cd in self.music_cds:
-            print(cd.title)
+            temp.append((cd.title, cd.artist, cd.track_count, cd.length, cd.purchase_price))
+        df = DataFrame(temp, columns=['Title', 'Artist', 'Track Count', 'Length', 'Purchase Price'])
+        df = df.set_index('Title')
+        print(df)
