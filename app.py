@@ -1,4 +1,4 @@
-import modules.core as core
+import core
 
 # Part 1
 # TODO: Add input

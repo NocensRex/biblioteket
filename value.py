@@ -1,15 +1,15 @@
-# TODO: Base value
+# DONE: Base value
 # All media types have 100% of purchase value att purchase year.
 # Value falls with 10% every year
 
-# TODO: Value of book
+# DONE: Value of book
 # An old book (age > 50 year) does not lose any more value, it increases with 8% every year instead.
 
-# TODO: Value of music-cd
+# DONE: Value of music-cd
 # Music-CD changes value depending on the amount of the same object (title and artist)
 # purchase_price / amount rounded to closest krona
 
-# TODO: Value of movie
+# DONE: Value of movie
 # Value on movies is calculated based on degree of wear and the age of the movie (Base value)
 # A wear value of 10 is mint condition and the value is 100% of purchase price.
 # A wear value of 1 is very worn and the value is only 10% of purchase price.
