@@ -1,4 +1,4 @@
-import core
+import modules.core as core
 
 # Part 1
 # DONE: Add input
@@ -14,6 +14,9 @@ import core
 
 # Part 4
 # TODO: Docstring for everything
+# TODO: README.md
+# TODO: Import from csv
+# TODO: Manipulate objects (Update, Remove etc)
 
 
 def main():
