@@ -1,4 +1,4 @@
-from mediatype import Book, Movie, Music_CD
+from modules.mediatype import Book, Movie, Music_CD
 from pandas import DataFrame
 
 
@@ -18,6 +18,7 @@ class Lib():
     def add_cd(self, title, artist, track_count, length, purchase_price):
         self.music_cds.append(Music_CD(title, artist, track_count, length, purchase_price))
 
+    # FIXME: Do not loop everything. Only that which is needed. arg eg (self, obj)
     def update_current_value(self):
         for obj in self.books:
             obj.set_current_value()
@@ -26,6 +27,7 @@ class Lib():
         for obj in self.music_cds:
             obj.set_current_value(len(self.music_cds))
 
+    # FIXME: Do NOT use pandas
     def print_lib(self):
         print('\nBooks:')
         temp = []

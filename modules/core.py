@@ -1,6 +1,6 @@
 import cmd
-import lib_class
-from other import write_to_file, read_from_file, write_to_json
+import modules.lib_class as lib_class
+from modules.other import write_to_file, read_from_file, write_to_json
 
 
 class LibShell(cmd.Cmd):
