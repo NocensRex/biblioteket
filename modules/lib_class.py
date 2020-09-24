@@ -23,7 +23,6 @@ class Lib():
         self.music_cds.append(Music_CD(title, artist, int(track_count), int(length), float(purchase_price)))
         self.update_current_value('cd')
 
-    # FIXME: Do not loop everything. Only that which is needed. arg eg (self, obj)
     def update_current_value(self, obj):
         'Updates the current value of an object'
         if obj == 'book':
