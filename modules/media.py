@@ -23,9 +23,6 @@ class Media:
                 value = value * 0.9
         return value
 
-    def __repr__(self):
-        pass
-
 
 class Book(Media):
     def __init__(self, title, author, page_count, purchase_price, purchase_year):
@@ -42,6 +39,12 @@ class Book(Media):
         else:
             self.current_price = super().base_price()
 
+    def __str__(self):
+        return f'Title: {self.title}, Author: {self.creator}, Current Price: {self.current_price}, Page Count: {self.page_count}, Purchase Price: {self.purchase_price}, Purchase Year: {self.purchase_year}'
+
+    def __repr__(self):
+        return f'Title: {self.title}, Author: {self.creator}, Current Price: {self.current_price}, Page Count: {self.page_count}, Purchase Price: {self.purchase_price}, Purchase Year: {self.purchase_year}'
+
 
 class Movie(Media):
     def __init__(self, title, director, length, purchase_price, purchase_year, degree_of_wear):
@@ -54,6 +57,12 @@ class Movie(Media):
         'This will calculate the value of a movie based on the base value and degree of wear'
         self.current_price = round(super().base_price() * float(f'0.{self.degree_of_wear}'), 2)
 
+    def __str__(self):
+        return f'Title: {self.title}, Director: {self.creator}, Current Price: {self.current_price}, Length: {self.length}, Purchase Price: {self.purchase_price}, Purchase Year: {self.purchase_year}, Degree of wear: {self.degree_of_wear}'
+
+    def __repr__(self):
+        return f'Title: {self.title}, Director: {self.creator}, Current Price: {self.current_price}, Length: {self.length}, Purchase Price: {self.purchase_price}, Purchase Year: {self.purchase_year}, Degree of wear: {self.degree_of_wear}'
+
 
 class Music_CD(Media):
     def __init__(self, title, artist, track_count, length, purchase_price):
@@ -64,3 +73,9 @@ class Music_CD(Media):
     def update_current_price(self, amount=1):
         'This will calculate the price of a cd object based on the amount of similar cds'
         self.current_price = int(round(self.purchase_price / amount))
+
+    def __str__(self):
+        return f'Title: {self.title}, Artist: {self.creator}, Current Price: {self.current_price}, Track Count: {self.track_count}, Length: {self.length}, Purchase Price: {self.purchase_price}'
+
+    def __repr__(self):
+        return f'Title: {self.title}, Artist: {self.creator}, Current Price: {self.current_price}, Track Count: {self.track_count}, Length: {self.length}, Purchase Price: {self.purchase_price}'
