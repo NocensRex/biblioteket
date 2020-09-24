@@ -13,12 +13,11 @@ class LibShell(cmd.Cmd):
 
     def do_add(self, arg):
         # b = book, m = movie, c = music cd
-        # TODO: Add more to strings
         self.my_library.add_media(to_list(parse(arg)))
 
     def do_show(self, arg):
         # all = show all
-        print(self.my_library)
+        self.my_library.show()
 
     def do_quit(self, *arg):
         'Exit the Program'
@@ -30,6 +29,7 @@ def parse(args):
 
 
 def to_list(args):
+    # TODO: Add more to strings
     if args[0] == 'b':
         if len(args) == 6:
             return [args[0], args[1], args[2], int(args[3]), float(args[4]), int(args[5])]
