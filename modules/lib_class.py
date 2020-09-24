@@ -34,8 +34,11 @@ class Lib():
                 obj.set_current_value()
         elif obj == 'cd':
             for obj in self.music_cds:
-                # FIXME: The amount is not calculated correct. It should be similar cds not all cds.
-                obj.set_current_value(len(self.music_cds))
+                count = 0
+                for cd in self.music_cds:
+                    if cd.get_all()[0] == obj.get_all()[0] and cd.get_all()[1] == obj.get_all()[1]:
+                        count += 1
+                obj.set_current_value(count)
 
     def show_all(self, order='title'):
         'This will show all items in library. Default sort is by title. Argument price to sort by current value'
