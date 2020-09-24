@@ -37,14 +37,19 @@ def write_to_json(data):
 
 
 def read_from_file():
-    with open(FILENAME, 'r') as f:
-        import_dict = json.load(f)
-
-    return import_dict
+    try:
+        with open(FILENAME, 'r') as f:
+            import_dict = json.load(f)
+        return import_dict
+    except FileNotFoundError:
+        print('No file found')
 
 
 def read_from_custom_file(filename):
-    with open(filename, 'r') as f:
-        csv_data = csv.reader(f)
-        new_list = [row for row in csv_data]
-        print(new_list)
+    try:
+        with open(filename, 'r') as f:
+            csv_data = csv.reader(f)
+            new_list = [row for row in csv_data]
+            print(new_list)
+    except FileNotFoundError:
+        print('File Not Found')
