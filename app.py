@@ -3,7 +3,7 @@ import modules.core as core
 # Part 1
 # DONE: Add input
 # DONE: Value calculation
-# FIXME: Print everything
+# FIXME: Print everything, eg. class.__str__
 
 # Part 2
 # DONE: Save all data to a file when program closes
