@@ -1,4 +1,4 @@
-import modules.core as core
+import modules.__main__ as core
 
 # Part 1
 # DONE: Add input
@@ -19,6 +19,8 @@ import modules.core as core
 # TODO: Import from csv
 # TODO: Manipulate objects (Update, Remove etc)
 # TODO: Try/Except on input
+
+# shif+alt+f auatopep
 
 
 def main():
