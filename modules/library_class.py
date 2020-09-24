@@ -18,5 +18,14 @@ class Lib:
         else:
             print('Something went wrong')
 
+    def show(self):
+        for x in self.media:
+            print(x)
+
     def __repr__(self):
-        return [x for x in self.media]
+        # return [x for x in self.media]
+        return self.media
+
+    def __str__(self):
+        prod = "\n".join(self.media)
+        return prod
