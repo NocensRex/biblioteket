@@ -1,6 +1,6 @@
 import cmd
 import modules.lib_class as lib_class
-from modules.other import write_to_file, read_from_file, write_to_json
+from modules.other import read_from_file, write_to_json, read_from_custom_file
 
 
 class LibShell(cmd.Cmd):
@@ -23,18 +23,23 @@ class LibShell(cmd.Cmd):
         self.my_library.add_movie(*parse(arg))
 
     def do_update_value(self, arg):
+        'Updates all current prices'
         self.my_library.update_current_value()
+
+    def do_custom(self, arg):
+        read_from_custom_file(*parse(arg))
 
     def do_save(self, arg):
         'This will save the data in library to files'
         write_to_json(self.my_library)
 
     def do_load(self, arg):
-        self.populate()
+        'Load data from the save file'
+        self.populate_from_json()
 
     def do_show_all(self, arg):
         'Print out the entire content of the library'
-        self.my_library.print_lib()
+        self.my_library.show_all(*parse(arg))
 
     def do_debug(self, arg):
         'This is a debug option to populate the library with random data'
@@ -58,7 +63,8 @@ class LibShell(cmd.Cmd):
         'Exit the Program'
         return True
 
-    def populate(self):
+    def populate_from_json(self):
+        'This function populates the library'
         data = read_from_file()
         for key in data:
             for row in data[key]:
@@ -81,7 +87,9 @@ class LibShell(cmd.Cmd):
                                            row['track_count'],
                                            row['length'],
                                            row['purchase_price'])
-        self.my_library.update_current_value()
+        self.my_library.update_current_value('book')
+        self.my_library.update_current_value('movie')
+        self.my_library.update_current_value('cd')
 
     def precmd(self, line):
         line = line.lower()
