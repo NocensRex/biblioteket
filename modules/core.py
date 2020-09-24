@@ -9,6 +9,10 @@ class LibShell(cmd.Cmd):
 
     def preloop(self):
         self.my_library = lib_class.Lib()
+        self.populate_from_json()
+
+    def postloop(self):
+        write_to_json(self.my_library)
 
     def do_add_book(self, arg):
         'Add a book to the library\nArguments: title author page_count purchase_price purchase_year'
@@ -44,7 +48,7 @@ class LibShell(cmd.Cmd):
     def do_debug(self, arg):
         'This is a debug option to populate the library with random data'
         self.my_library.add_book('a Book', 'g author', 23, 123, 2014)
-        self.my_library.add_book('d Book', 'f author', 45, 43, 567)
+        self.my_library.add_book('d Book', 'f author', 45, 43, 1567)
         self.my_library.add_book('h Book', 'b author', 5, 23, 2019)
         self.my_library.add_book('b Book', 'm author', 6, 98, 2012)
         self.my_library.add_book('i Book', 'd author', 8, 1, 2015)
