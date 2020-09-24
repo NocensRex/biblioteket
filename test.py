@@ -7,6 +7,11 @@ class TestShell(cmd.Cmd):
 
     def do_asd(self, arg):
         print('Working!')
+        print(arg)
+        print(type(arg))
+        print(parse(arg))
+        print(type(parse(arg)))
+        print(*parse(arg))
 
     def do_quit(self, arg):
         print('Bye!')
