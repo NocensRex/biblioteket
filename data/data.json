@@ -10,10 +10,10 @@
         },
         {
             "author": "f author",
-            "current_value": 1.734294615509596e+46,
+            "current_value": 6536832982455.98,
             "page_count": 45,
             "purchase_price": 43.0,
-            "purchase_year": 567,
+            "purchase_year": 1567,
             "title": "d Book"
         },
         {
@@ -39,6 +39,14 @@
             "purchase_price": 1.0,
             "purchase_year": 2015,
             "title": "i Book"
+        },
+        {
+            "author": "lundin",
+            "current_value": 111.58,
+            "page_count": 34,
+            "purchase_price": 320.0,
+            "purchase_year": 2010,
+            "title": "joel"
         }
     ],
     "movies": [
@@ -91,7 +99,7 @@
     "music_cds": [
         {
             "artist": "d artist",
-            "current_value": 13,
+            "current_value": 67,
             "length": 108,
             "purchase_price": 67.0,
             "title": "w cd",
@@ -99,7 +107,7 @@
         },
         {
             "artist": "l artist",
-            "current_value": 62,
+            "current_value": 309,
             "length": 56,
             "purchase_price": 309.0,
             "title": "g cd",
@@ -107,7 +115,7 @@
         },
         {
             "artist": "n artist",
-            "current_value": 1,
+            "current_value": 7,
             "length": 7,
             "purchase_price": 7.0,
             "title": "x cd",
@@ -115,7 +123,7 @@
         },
         {
             "artist": "j artist",
-            "current_value": 25,
+            "current_value": 123,
             "length": 34,
             "purchase_price": 123.0,
             "title": "j cd",
@@ -123,7 +131,7 @@
         },
         {
             "artist": "a artist",
-            "current_value": 86,
+            "current_value": 432,
             "length": 48,
             "purchase_price": 432.0,
             "title": "n cd",
