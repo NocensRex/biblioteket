@@ -1,35 +1,11 @@
-def simp_sum(x, y, z):
-    return sum((x, y, z))
+class Point:
+    def __init__(self, x, y):
+        self.x, self.y = x, y
 
-def getValues():
-    return [1, 2, 3]
-
-print(getValues())
-print(simp_sum(*getValues()))
-
-# import cmd
+    def __repr__(self):
+        return f'Point(x={self.x}, y={self.y})'
 
 
-# class TestShell(cmd.Cmd):
-#     intro = 'This is a test shell'
-#     prompt = '->'
+p = Point(3, 4)
 
-#     def do_asd(self, arg):
-#         print('Working!')
-#         print(arg)
-#         print(type(arg))
-#         print(parse(arg))
-#         print(type(parse(arg)))
-#         print(*parse(arg))
-
-#     def do_quit(self, arg):
-#         print('Bye!')
-#         return True
-
-
-# def parse(arg):
-#     return tuple(arg.split())
-
-
-# if __name__ == '__main__':
-#     TestShell().cmdloop()
+print(p)
