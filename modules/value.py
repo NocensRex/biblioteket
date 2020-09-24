@@ -23,6 +23,7 @@ TODAY = datetime.datetime.today()
 
 
 def current_value(purchase_price, age):
+    'This will calculate the base value of an object'
     value = purchase_price
     if age != 0:
         for year in range(1, age+1):
@@ -31,6 +32,7 @@ def current_value(purchase_price, age):
 
 
 def book_value(purchase_price, purchase_year):
+    'This will recalculate the value of a book if it is older than 50 years'
     age = TODAY.year - purchase_year
     if age > 50:
         value = current_value(purchase_price, 50)
@@ -42,10 +44,12 @@ def book_value(purchase_price, purchase_year):
 
 
 def cd_value(purchase_price, amount):
+    'This will calculate the price of a cd object based on the amount of similar cds'
     return int(round(purchase_price / amount))
 
 
 def movie_value(purchase_price, purchase_year, degree_of_wear):
+    'This will calculate the value of a movie based on the base value and degree of wear'
     age = TODAY.year - purchase_year
     value = current_value(purchase_price, age) * float(f'0.{degree_of_wear}')
     return round(value, 2)
