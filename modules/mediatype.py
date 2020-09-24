@@ -11,7 +11,7 @@ class Book():
         self.current_value = 0
 
     def get_all(self):
-        return self.title, self.author, self.page_count, self.purchase_price, self.purchase_year, self.current_value
+        return [self.title, self.author, self.page_count, self.purchase_price, self.purchase_year, self.current_value]
 
     def set_current_value(self):
         self.current_value = value.book_value(self.purchase_price, self.purchase_year)
