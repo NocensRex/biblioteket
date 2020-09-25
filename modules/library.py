@@ -1,6 +1,51 @@
 import datetime
 
 
+class Lib:
+    def __init__(self):
+        self.media = []
+
+    def add_media(self, input_data):
+        if input_data[0] == 'b':
+            self.media.append(Book(*input_data[1:]))
+            print('Book added')
+        elif input_data[0] == 'm':
+            self.media.append(Movie(*input_data[1:]))
+            print('Movie added')
+        elif input_data[0] == 'c':
+            self.media.append(Music_CD(*input_data[1:]))
+            print('Music CD added')
+        else:
+            print('Something went wrong')
+
+    def show(self):
+        for x in self.media:
+            print(x)
+            print(repr(x))
+            print(vars(x))
+            print()
+
+    def update_prices(self):
+        for elm in self.media:
+            if isinstance(elm, Music_CD):
+                count = 0
+                for x in self.media:
+                    if isinstance(elm, Music_CD):
+                        count += 1
+                elm.update_current_price(count)
+            else:
+                elm.update_current_price()
+        print('Prices have been updated')
+
+    def __repr__(self):
+        # return [x for x in self.media]
+        return self.media
+
+    def __str__(self):
+        prod = "\n".join(self.media)
+        return prod
+
+
 class Media:
     def __init__(self, title, creator, purchase_price, purchase_year=None):
         self.title = title
@@ -41,11 +86,11 @@ class Book(Media):
         if self.age > 50:
             price = super().base_price(50)
             for year in range(51, self.age+1):
-                price = price() * 1.08
-                self.current_price = price
+                price = price * 1.08
+                self.current_price = round(price, 2)
         else:
             price = super().base_price()
-            self.current_price = price
+            self.current_price = round(price, 2)
 
     def __str__(self):
         # return f'Title: {self.title}, Author: {self.creator}, Current Price: {self.current_price}, Page Count: {self.page_count},
@@ -68,7 +113,8 @@ class Movie(Media):
         self.current_price = round(super().base_price() * float(f'0.{self.degree_of_wear}'), 2)
 
     def __str__(self):
-    #     return f'Title: {self.title}, Director: {self.creator}, Current Price: {self.current_price}, Length: {self.length}, Purchase Price: {self.purchase_price}, Purchase Year: {self.purchase_year}, Degree of wear: {self.degree_of_wear}'
+        # return f'Title: {self.title}, Director: {self.creator}, Current Price: {self.current_price}, Length: {self.length}, Purchase Price: {self.purchase_price},
+        # Purchase Year: {self.purchase_year}, Degree of wear: {self.degree_of_wear}'
         return f'{self.__class__.__name__}({self.title}, {self.creator}, {self.purchase_price}, {self.current_price}, {self.length}, {self.purchase_year}, {self.age}, {self.degree_of_wear})'
 
     def __repr__(self):

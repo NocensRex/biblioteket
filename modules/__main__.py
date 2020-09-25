@@ -1,6 +1,6 @@
 import cmd
 
-from modules.library_class import Lib
+from modules.library import Lib
 
 
 class LibShell(cmd.Cmd):
@@ -13,11 +13,20 @@ class LibShell(cmd.Cmd):
 
     def do_add(self, arg):
         # b = book, m = movie, c = music cd
-        self.my_library.add_media(to_list(parse(arg)))
+        arg_list = to_list(parse(arg))
+        if arg_list[1] is True:
+            self.my_library.add_media(arg_list[0])
+            self.my_library.update_prices()
+        else:
+            print('You did not give correct amount of data')
+
+    def do_update(self, arg):
+        self.my_library.update_prices()
 
     def do_show(self, arg):
         # all = show all
         self.my_library.show()
+        print(vars(self.my_library))
 
     def do_quit(self, *arg):
         'Exit the Program'
@@ -32,20 +41,26 @@ def to_list(args):
     # TODO: Add more to strings
     if args[0] == 'b':
         if len(args) == 6:
-            return [args[0], args[1], args[2], int(args[3]), float(args[4]), int(args[5])]
+            return ([args[0], args[1], args[2], int(args[3]), float(args[4]), int(args[5])], True)
         else:
-            print('You did not give correct amount of data')
+            return (False, False)
     elif args[0] == 'm':
-        print('pass')
         if len(args) == 7:
-            return [args[0], args[1], args[2], int(args[3]), float(args[4]), int(args[5]), int(args[6])]
+            return ([args[0], args[1], args[2], int(args[3]), float(args[4]), int(args[5]), int(args[6])], True)
         else:
-            print('You did not give correct amount of data')
+            return (False, False)
     elif args[0] == 'c':
-        print('pass')
         if len(args) == 6:
-            return [args[0], args[1], args[2], int(args[3]), int(args[4]), float(args[5])]
+            return ([args[0], args[1], args[2], int(args[3]), int(args[4]), float(args[5])], True)
         else:
-            print('You did not give correct amount of data')
+            return (False, False)
     else:
         print('You did not define what mediatype you wish to add')
+
+
+def to_json(data):
+    pass
+
+
+def from_json():
+    pass
