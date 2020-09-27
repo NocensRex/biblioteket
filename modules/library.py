@@ -6,6 +6,7 @@ class Lib:
         self.media = []
 
     def add_media(self, input_data):
+        print(input_data)
         if input_data[0] == 'b':
             self.media.append(Book(*input_data[1:]))
             print('Book added')
@@ -19,11 +20,28 @@ class Lib:
             print('Something went wrong')
 
     def show(self):
+        books = []
+        movies = []
+        cds = []
         for x in self.media:
-            print(x)
-            print(repr(x))
-            print(vars(x))
-            print()
+            if isinstance(x, Book):
+                books.append((x.title, x.current_price, x))
+            if isinstance(x, Movie):
+                movies.append((x.title, x.current_price, x))
+            if isinstance(x, Music_CD):
+                cds.append((x.title, x.current_price, x))
+        print('\nBooks')
+        print('------------')
+        for book in books:
+            print(book[2])
+        print('\nMovies')
+        print('------------')
+        for movie in movies:
+            print(movie)
+        print('\nMusic CDs')
+        print('------------')
+        for cd in cds:
+            print(cd)
 
     def update_prices(self):
         for elm in self.media:

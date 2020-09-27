@@ -14,6 +14,7 @@ class LibShell(cmd.Cmd):
     def do_add(self, arg):
         # b = book, m = movie, c = music cd
         arg_list = to_list(parse(arg))
+        print(arg_list)
         if arg_list[1] is True:
             self.my_library.add_media(arg_list[0])
             self.my_library.update_prices()
@@ -39,6 +40,7 @@ def parse(args):
 
 def to_list(args):
     # TODO: Add more to strings
+    print(args)
     if args[0] == 'b':
         if len(args) == 6:
             return ([args[0], args[1], args[2], int(args[3]), float(args[4]), int(args[5])], True)
