@@ -4,6 +4,7 @@
             "age": 453,
             "creator": "f author",
             "current_price": 43,
+            "mediatype": "Book",
             "page_count": 45,
             "purchase_price": 43,
             "purchase_year": 1567,
@@ -13,6 +14,7 @@
             "age": 6,
             "creator": "g author",
             "current_price": 123,
+            "mediatype": "Book",
             "page_count": 23,
             "purchase_price": 123,
             "purchase_year": 2014,
@@ -22,6 +24,7 @@
             "age": 1,
             "creator": "b author",
             "current_price": 23,
+            "mediatype": "Book",
             "page_count": 5,
             "purchase_price": 23,
             "purchase_year": 2019,
@@ -31,6 +34,7 @@
             "age": 8,
             "creator": "m author",
             "current_price": 98,
+            "mediatype": "Book",
             "page_count": 6,
             "purchase_price": 98,
             "purchase_year": 2012,
@@ -40,6 +44,7 @@
             "age": 5,
             "creator": "d author",
             "current_price": 1,
+            "mediatype": "Book",
             "page_count": 8,
             "purchase_price": 1,
             "purchase_year": 2015,
@@ -53,6 +58,7 @@
             "current_price": 11.07,
             "degree_of_wear": 10,
             "length": 156,
+            "mediatype": "Movie",
             "purchase_price": 123,
             "purchase_year": 2019,
             "title": "good one"
@@ -63,6 +69,7 @@
             "current_price": 95.07,
             "degree_of_wear": 7,
             "length": 120,
+            "mediatype": "Movie",
             "purchase_price": 230,
             "purchase_year": 2015,
             "title": "decent one"
@@ -73,6 +80,7 @@
             "current_price": 21.09,
             "degree_of_wear": 5,
             "length": 99,
+            "mediatype": "Movie",
             "purchase_price": 98,
             "purchase_year": 2012,
             "title": "eehh"
@@ -83,6 +91,7 @@
             "current_price": 10.45,
             "degree_of_wear": 3,
             "length": 56,
+            "mediatype": "Movie",
             "purchase_price": 43,
             "purchase_year": 2018,
             "title": "not good"
@@ -93,6 +102,7 @@
             "current_price": 28.67,
             "degree_of_wear": 1,
             "length": 66,
+            "mediatype": "Movie",
             "purchase_price": 666,
             "purchase_year": 2012,
             "title": "bad bad"
@@ -104,6 +114,7 @@
             "creator": "l artist",
             "current_price": 309,
             "length": 56,
+            "mediatype": "Music_CD",
             "purchase_price": 309,
             "title": "g cd",
             "track_count": 6
@@ -113,6 +124,7 @@
             "creator": "d artist",
             "current_price": 67,
             "length": 108,
+            "mediatype": "Music_CD",
             "purchase_price": 67,
             "title": "w cd",
             "track_count": 13
@@ -122,6 +134,7 @@
             "creator": "n artist",
             "current_price": 120,
             "length": 70,
+            "mediatype": "Music_CD",
             "purchase_price": 120,
             "title": "x cd",
             "track_count": 7
@@ -131,6 +144,7 @@
             "creator": "n artist",
             "current_price": 100,
             "length": 54,
+            "mediatype": "Music_CD",
             "purchase_price": 100,
             "title": "x cd",
             "track_count": 8
@@ -140,6 +154,7 @@
             "creator": "n artist",
             "current_price": 200,
             "length": 66,
+            "mediatype": "Music_CD",
             "purchase_price": 200,
             "title": "x cd",
             "track_count": 12
@@ -149,6 +164,7 @@
             "creator": "j artist",
             "current_price": 123,
             "length": 34,
+            "mediatype": "Music_CD",
             "purchase_price": 123,
             "title": "j cd",
             "track_count": 4
@@ -158,6 +174,7 @@
             "creator": "a artist",
             "current_price": 432,
             "length": 48,
+            "mediatype": "Music_CD",
             "purchase_price": 432,
             "title": "n cd",
             "track_count": 23
@@ -167,6 +184,7 @@
             "creator": "a artist",
             "current_price": 432,
             "length": 48,
+            "mediatype": "Music_CD",
             "purchase_price": 432,
             "title": "n cd",
             "track_count": 23
