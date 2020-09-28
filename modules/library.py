@@ -139,6 +139,7 @@ class Media:
 
 @Media.register_subclass('book')
 class Book(Media):
+    mediatype = 'book'
     def __init__(self, title, author, page_count, purchase_price, purchase_year):
         super().__init__(title, author, purchase_price, purchase_year)
         self.page_count = page_count
@@ -156,7 +157,7 @@ class Book(Media):
             self.current_price = round(price, 2)
 
     def save(self) -> list:
-        return [{self.title}, {self.creator}, {self.page_count}, {self.purchase_price}, {self.purchase_year}]
+        return (Book.mediatype, [self.title, self.creator, self.page_count, self.purchase_price, self.purchase_year])
 
     def __str__(self):
         return f'{self.mediatype}({self.title}, {self.creator}, {self.purchase_price}, {self.current_price}, {self.page_count}, {self.purchase_year},  {self.age})'
@@ -167,6 +168,7 @@ class Book(Media):
 
 @Media.register_subclass('movie')
 class Movie(Media):
+    mediatype = 'movie'
     def __init__(self, title, director, length, purchase_price, purchase_year, degree_of_wear):
         super().__init__(title, director, purchase_price, purchase_year)
         self.length = length
@@ -178,7 +180,7 @@ class Movie(Media):
         self.current_price = round(super().base_price() * float(f'0.{self.degree_of_wear}'), 2)
 
     def save(self) -> list:
-        return [{self.title}, {self.creator}, {self.length}, {self.purchase_price}, {self.purchase_year}, {self.degree_of_wear}]
+        return (Movie.mediatype, [self.title, self.creator, self.length, self.purchase_price, self.purchase_year, self.degree_of_wear])
 
     def __str__(self):
         return f'{self.mediatype}({self.title}, {self.creator}, {self.purchase_price}, {self.current_price}, {self.length}, {self.purchase_year}, {self.age}, {self.degree_of_wear})'
@@ -189,6 +191,7 @@ class Movie(Media):
 
 @Media.register_subclass('cd')
 class Music_CD(Media):
+    mediatype = 'cd'
     def __init__(self, title, artist, track_count, length, purchase_price):
         super().__init__(title, artist, purchase_price)
         self.track_count = track_count
@@ -200,7 +203,7 @@ class Music_CD(Media):
         self.current_price = int(round(self.purchase_price / amount))
 
     def save(self) -> list:
-        return [{self.title}, {self.creator}, {self.track_count}, {self.length}, {self.purchase_price}]
+        return (Music_CD.mediatype, [self.title, self.creator, self.track_count, self.length, self.purchase_price])
 
     def __str__(self):
         return f'{self.mediatype}({self.title}, {self.creator}, {self.purchase_price}, {self.current_price}, {self.track_count},  {self.length})'
