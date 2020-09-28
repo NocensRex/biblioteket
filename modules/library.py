@@ -19,7 +19,6 @@ class Lib:
         else:
             print('Something went wrong')
 
-
     def show(self, sort='title'):
         books = []
         movies = []

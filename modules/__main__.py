@@ -26,7 +26,6 @@ class LibShell(cmd.Cmd):
         # else:
         #     print('You did not give correct amount of data')
 
-
     def do_update(self, arg):
         self.my_library.update_prices()
 
