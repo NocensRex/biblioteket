@@ -6,16 +6,12 @@ class Lib:
         self.media = []
 
     def add_media(self, input_data):
-        print(input_data)
         if input_data[0] == 'b':
             self.media.append(Book(*input_data[1:]))
-            print('Book added')
         elif input_data[0] == 'm':
             self.media.append(Movie(*input_data[1:]))
-            print('Movie added')
         elif input_data[0] == 'c':
             self.media.append(Music_CD(*input_data[1:]))
-            print('Music CD added')
         else:
             print('Something went wrong')
 
