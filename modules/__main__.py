@@ -2,6 +2,7 @@ import cmd
 import json
 
 from modules.library import Lib
+from modules.library import Media
 
 
 class LibShell(cmd.Cmd):
@@ -11,14 +12,15 @@ class LibShell(cmd.Cmd):
 
     def preloop(self):
         self.my_library = Lib()
-        self.populate_from_json()
+        # self.populate_from_json()
 
     def postloop(self):
-        save_data(self.my_library.to_dict())
+        # save_data(self.my_library.to_dict())
+        pass
 
     def do_add(self, arg):
         obj = add_media()
-        self.my_library.add_media(obj)
+        self.my_library.media.append(Media.create(obj[0], obj[1]))
         self.my_library.update_prices()
 
     def do_update(self, arg):
@@ -32,7 +34,7 @@ class LibShell(cmd.Cmd):
         self.my_library.update_prices()
 
     def do_d(self, arg):
-        print(vars(self.my_library))
+        pass
 
     def do_show(self, arg):
         self.my_library.show(*parse(arg))
@@ -41,6 +43,7 @@ class LibShell(cmd.Cmd):
         'Exit the Program'
         return True
 
+    # FIXME:
     def populate_from_json(self):
         'This function populates the library'
         data = load_data()
@@ -69,6 +72,10 @@ class LibShell(cmd.Cmd):
                                               row['length'],
                                               row['purchase_price']])
 
+    
+    def new_populate(self):
+        self.my_library.media.append(Media.create(data1, data2))
+
 
 def parse(args):
     print(args)
@@ -90,7 +97,7 @@ def add_media():
         page_count = int(input('Page Count: '))
         purchase_price = float(input('Purchase Price: '))
         purchase_year = int(input('Purchase Year: '))
-        return ['b', title, author, page_count, purchase_price, purchase_year]
+        return ('book', [title, author, page_count, purchase_price, purchase_year])
     elif choice == 2:
         print('\nAdding a movie')
         title = input('Title: ')
@@ -99,7 +106,7 @@ def add_media():
         purchase_price = float(input('Purchase Price: '))
         purchase_year = int(input('Purchase Year: '))
         degree_of_wear = int(input('Degree of wear (on a scale from 1 to 10): '))
-        return ['m', title, director, length, purchase_price, purchase_year, degree_of_wear]
+        return ('movie', [title, director, length, purchase_price, purchase_year, degree_of_wear])
     elif choice == 3:
         print('\nAdding a music cd')
         title = input('Title: ')
@@ -107,7 +114,7 @@ def add_media():
         track_count = int(input('Track Count: '))
         length = int(input('Length in minutes: '))
         purchase_price = float(input('Purchase Price: '))
-        return ['c', title, artist, track_count, length, purchase_price]
+        return ('cd', [title, artist, track_count, length, purchase_price])
 
     else:
         print('You did not give an acceptable answer')

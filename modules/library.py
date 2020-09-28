@@ -5,6 +5,8 @@ class Lib:
     def __init__(self):
         self.media = []
 
+    # FIXME:
+    # REMOVE after import is fixed
     def add_media(self, input_data):
         if input_data[0] == 'b':
             self.media.append(Book(*input_data[1:]))
@@ -15,6 +17,7 @@ class Lib:
         else:
             print('Something went wrong')
 
+    # FIXME:
     def show(self, sort='title'):
         books = []
         movies = []
@@ -46,6 +49,7 @@ class Lib:
         for cd in cds:
             print(cd[2])
 
+    # FIXME: maybe outside Lib class
     def to_dict(self) -> dict:
         'Return a dict with {books, movies, cds}'
         books = []
@@ -64,6 +68,7 @@ class Lib:
         temp_dict['music_cds'] = music_cds
         return temp_dict
 
+    # FIXME: DRY
     def update_prices(self):
         for elm in self.media:
             if isinstance(elm, Music_CD):
@@ -87,7 +92,10 @@ class Lib:
 
 
 class Media:
+    subclasses = {}
+
     def __init__(self, title, creator, purchase_price, purchase_year=None):
+        self.mediatype = self.__class__.__name__
         self.title = title
         self.creator = creator
         self.purchase_price = purchase_price
@@ -108,6 +116,20 @@ class Media:
                 value = value * 0.9
         return value
 
+    @classmethod
+    def register_subclass(cls, media_type):
+        def decorator(subclass):
+            cls.subclasses[media_type] = subclass
+            return subclass
+        return decorator
+
+    @classmethod
+    def create(cls, mediatype, params):
+        if mediatype not in cls.subclasses:
+            raise ValueError(f'{mediatype} is not a an acceptable mediatype')
+
+        return cls.subclasses[mediatype](*params)
+
     def __repr__(self):
         if self.purchase_year is not None:
             return f'{self.__class__.__name__}({self.title}{self.creator}{self.purchase_price}{self.current_price}{self.purchase_year}{self.age}'
@@ -115,6 +137,7 @@ class Media:
             return f'{self.__class__.__name__}({self.title}, {self.creator}, {self.purchase_price}, {self.current_price}'
 
 
+@Media.register_subclass('book')
 class Book(Media):
     def __init__(self, title, author, page_count, purchase_price, purchase_year):
         super().__init__(title, author, purchase_price, purchase_year)
@@ -136,12 +159,13 @@ class Book(Media):
         return [{self.title}, {self.creator}, {self.page_count}, {self.purchase_price}, {self.purchase_year}]
 
     def __str__(self):
-        return f'{self.__class__.__name__}({self.title}, {self.creator}, {self.purchase_price}, {self.current_price}, {self.page_count}, {self.purchase_year},  {self.age})'
+        return f'{self.mediatype}({self.title}, {self.creator}, {self.purchase_price}, {self.current_price}, {self.page_count}, {self.purchase_year},  {self.age})'
 
     def __repr__(self):
-        return f'{self.__class__.__name__}(\"{self.title}\", \"{self.creator}\", {self.page_count}, {self.purchase_price}, {self.purchase_year})'
+        return f'{self.mediatype}(\"{self.title}\", \"{self.creator}\", {self.page_count}, {self.purchase_price}, {self.purchase_year})'
 
 
+@Media.register_subclass('movie')
 class Movie(Media):
     def __init__(self, title, director, length, purchase_price, purchase_year, degree_of_wear):
         super().__init__(title, director, purchase_price, purchase_year)
@@ -157,12 +181,13 @@ class Movie(Media):
         return [{self.title}, {self.creator}, {self.length}, {self.purchase_price}, {self.purchase_year}, {self.degree_of_wear}]
 
     def __str__(self):
-        return f'{self.__class__.__name__}({self.title}, {self.creator}, {self.purchase_price}, {self.current_price}, {self.length}, {self.purchase_year}, {self.age}, {self.degree_of_wear})'
+        return f'{self.mediatype}({self.title}, {self.creator}, {self.purchase_price}, {self.current_price}, {self.length}, {self.purchase_year}, {self.age}, {self.degree_of_wear})'
 
     def __repr__(self):
-        return f'{self.__class__.__name__}(\"{self.title}\", \"{self.creator}\", {self.length}, {self.purchase_price}, {self.purchase_year}, {self.degree_of_wear})'
+        return f'{self.mediatype}(\"{self.title}\", \"{self.creator}\", {self.length}, {self.purchase_price}, {self.purchase_year}, {self.degree_of_wear})'
 
 
+@Media.register_subclass('cd')
 class Music_CD(Media):
     def __init__(self, title, artist, track_count, length, purchase_price):
         super().__init__(title, artist, purchase_price)
@@ -178,7 +203,7 @@ class Music_CD(Media):
         return [{self.title}, {self.creator}, {self.track_count}, {self.length}, {self.purchase_price}]
 
     def __str__(self):
-        return f'{self.__class__.__name__}({self.title}, {self.creator}, {self.purchase_price}, {self.current_price}, {self.track_count},  {self.length})'
+        return f'{self.mediatype}({self.title}, {self.creator}, {self.purchase_price}, {self.current_price}, {self.track_count},  {self.length})'
 
     def __repr__(self):
-        return f'{self.__class__.__name__}(\"{self.title}\", \"{self.creator}\", {self.track_count}, {self.length}, {self.purchase_price})'
+        return f'{self.mediatype}(\"{self.title}\", \"{self.creator}\", {self.track_count}, {self.length}, {self.purchase_price})'
