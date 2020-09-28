@@ -83,7 +83,6 @@ class Lib:
         print('Prices have been updated')
 
     def __repr__(self):
-        # return [x for x in self.media]
         return self.media
 
     def __str__(self):
@@ -141,8 +140,6 @@ class Book(Media):
         return [{self.title}, {self.creator}, {self.page_count}, {self.purchase_price}, {self.purchase_year}]
 
     def __str__(self):
-        # return f'Title: {self.title}, Author: {self.creator}, Current Price: {self.current_price}, Page Count: {self.page_count},
-        # Purchase Price: {self.purchase_price}, Purchase Year: {self.purchase_year}'
         return f'{self.__class__.__name__}({self.title}, {self.creator}, {self.purchase_price}, {self.current_price}, {self.page_count}, {self.purchase_year},  {self.age})'
 
     def __repr__(self):
@@ -164,8 +161,6 @@ class Movie(Media):
         return [{self.title}, {self.creator}, {self.length}, {self.purchase_price}, {self.purchase_year}, {self.degree_of_wear}]
 
     def __str__(self):
-        # return f'Title: {self.title}, Director: {self.creator}, Current Price: {self.current_price}, Length: {self.length}, Purchase Price: {self.purchase_price},
-        # Purchase Year: {self.purchase_year}, Degree of wear: {self.degree_of_wear}'
         return f'{self.__class__.__name__}({self.title}, {self.creator}, {self.purchase_price}, {self.current_price}, {self.length}, {self.purchase_year}, {self.age}, {self.degree_of_wear})'
 
     def __repr__(self):
@@ -187,7 +182,6 @@ class Music_CD(Media):
         return [{self.title}, {self.creator}, {self.track_count}, {self.length}, {self.purchase_price}]
 
     def __str__(self):
-        # return f'Title: {self.title}, Artist: {self.creator}, Current Price: {self.current_price}, Track Count: {self.track_count}, Length: {self.length}, Purchase Price: {self.purchase_price}'
         return f'{self.__class__.__name__}({self.title}, {self.creator}, {self.purchase_price}, {self.current_price}, {self.track_count},  {self.length})'
 
     def __repr__(self):
