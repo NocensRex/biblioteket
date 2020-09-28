@@ -17,14 +17,6 @@ class LibShell(cmd.Cmd):
         obj = add_media()
         self.my_library.add_media(obj)
         self.my_library.update_prices()
-        # b = book, m = movie, c = music cd
-
-        # arg_list = to_list(parse(arg))
-        # if arg_list[1] is True:
-        #     self.my_library.add_media(arg_list[0])
-        #     self.my_library.update_prices()
-        # else:
-        #     print('You did not give correct amount of data')
 
     def do_update(self, arg):
         self.my_library.update_prices()
@@ -54,20 +46,46 @@ class LibShell(cmd.Cmd):
         save_data(self.my_library.to_dict())
 
     def do_load(self, arg):
-        import_data = from_file()
-        for elm in import_data:
-            exec(elm.rstrip())
+        self.populate_from_json()
+        self.my_library.update_prices()
 
     def do_d(self, arg):
         print(vars(self.my_library))
 
     def do_show(self, arg):
-        # all = show all
         self.my_library.show(*parse(arg))
 
     def do_quit(self, *arg):
         'Exit the Program'
         return True
+
+    def populate_from_json(self):
+        'This function populates the library'
+        data = load_data()
+        for key in data:
+            for row in data[key]:
+                if key == 'books':
+                    self.my_library.add_media(['b',
+                                              row['title'],
+                                              row['creator'],
+                                              row['page_count'],
+                                              row['purchase_price'],
+                                              row['purchase_year']])
+                elif key == 'movies':
+                    self.my_library.add_media(['m',
+                                              row['title'],
+                                              row['creator'],
+                                              row['length'],
+                                              row['purchase_price'],
+                                              row['purchase_year'],
+                                              row['degree_of_wear']])
+                elif key == 'music_cds':
+                    self.my_library.add_media(['c',
+                                              row['title'],
+                                              row['creator'],
+                                              row['track_count'],
+                                              row['length'],
+                                              row['purchase_price']])
 
 
 def parse(args):
@@ -118,7 +136,6 @@ def save_data(data):
         json.dump(data, f, indent=4, sort_keys=True)
 
 
-# FIXME: Need to work
 def load_data():
     try:
         with open('data/data.json', 'r') as f:
