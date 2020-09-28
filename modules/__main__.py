@@ -18,12 +18,14 @@ class LibShell(cmd.Cmd):
         self.my_library.add_media(obj)
         self.my_library.update_prices()
         # b = book, m = movie, c = music cd
+
         # arg_list = to_list(parse(arg))
         # if arg_list[1] is True:
         #     self.my_library.add_media(arg_list[0])
         #     self.my_library.update_prices()
         # else:
         #     print('You did not give correct amount of data')
+
 
     def do_update(self, arg):
         self.my_library.update_prices()
@@ -107,6 +109,7 @@ def add_media():
         length = int(input('Length in minutes: '))
         purchase_price = float(input('Purchase Price: '))
         return ['c', title, artist, track_count, length, purchase_price]
+
     else:
         print('You did not give an acceptable answer')
 

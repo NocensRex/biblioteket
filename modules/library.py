@@ -6,6 +6,7 @@ class Lib:
         self.media = []
 
     def add_media(self, input_data):
+        print(input_data)
         if input_data[0] == 'b':
             self.media.append(Book(*input_data[1:]))
             print('Book added')
@@ -17,6 +18,7 @@ class Lib:
             print('Music CD added')
         else:
             print('Something went wrong')
+
 
     def show(self, sort='title'):
         books = []
