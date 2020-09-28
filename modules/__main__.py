@@ -11,7 +11,10 @@ class LibShell(cmd.Cmd):
 
     def preloop(self):
         self.my_library = Lib()
-        load_data()
+        self.populate_from_json()
+
+    def postloop(self):
+        save_data(self.my_library.to_dict())
 
     def do_add(self, arg):
         obj = add_media()
@@ -20,27 +23,6 @@ class LibShell(cmd.Cmd):
 
     def do_update(self, arg):
         self.my_library.update_prices()
-
-    def do_debug(self, arg):
-        'This is a debug option to populate the library with random data'
-        self.my_library.add_media(['b', 'd Book', 'f author', 45, 43, 1567])
-        self.my_library.add_media(['b', 'a Book', 'g author', 23, 123, 2014])
-        self.my_library.add_media(['b', 'h Book', 'b author', 5, 23, 2019])
-        self.my_library.add_media(['b', 'b Book', 'm author', 6, 98, 2012])
-        self.my_library.add_media(['b', 'i Book', 'd author', 8, 1, 2015])
-        self.my_library.add_media(['c', 'g cd', 'l artist', 6, 56, 309])
-        self.my_library.add_media(['c', 'w cd', 'd artist', 13, 108, 67])
-        self.my_library.add_media(['c', 'x cd', 'n artist', 7, 70, 120])
-        self.my_library.add_media(['c', 'x cd', 'n artist', 8, 54, 100])
-        self.my_library.add_media(['c', 'x cd', 'n artist', 12, 66, 200])
-        self.my_library.add_media(['c', 'j cd', 'j artist', 4, 34, 123])
-        self.my_library.add_media(['c', 'n cd', 'a artist', 23, 48, 432])
-        self.my_library.add_media(['c', 'n cd', 'a artist', 23, 48, 432])
-        self.my_library.add_media(['m', 'good one', 'gustav', 156, 123, 2019, 10])
-        self.my_library.add_media(['m', 'decent one', 'davidsson', 120, 230, 2015, 7])
-        self.my_library.add_media(['m', 'eehh', 'matsumoto', 99, 98, 2012, 5])
-        self.my_library.add_media(['m', 'not good', 'gusten', 56, 43, 2018, 3])
-        self.my_library.add_media(['m', 'bad bad', 'god', 66, 666, 2012, 1])
 
     def do_save(self, arg):
         save_data(self.my_library.to_dict())
@@ -145,6 +127,7 @@ def load_data():
         print('No file found')
 
 
+# FIXME: Redundant code
 def to_file(data: Lib):
     data_list = data.media
     with open('data/data.txt', 'w') as f:
@@ -153,6 +136,7 @@ def to_file(data: Lib):
             f.write(repr(elm) + '\n')
 
 
+# FIXME: Redundant code
 def from_file():
     with open('data/data.txt', 'r') as f:
         data_list = f.readlines()
