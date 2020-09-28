@@ -7,7 +7,7 @@ import modules.__main__ as core
 
 # Part 2
 # DONE: Save all data to a file when program closes
-# DONE: When program starts check if a file with data exists and load it
+# FIXME: When program starts check if a file with data exists and load it
 
 # Part 3
 # DONE: Make it possible to sort data in different ways
