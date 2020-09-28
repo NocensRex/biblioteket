@@ -72,7 +72,7 @@ class LibShell(cmd.Cmd):
                                               row['length'],
                                               row['purchase_price']])
 
-    
+
     def new_populate(self):
         self.my_library.media.append(Media.create(data1, data2))
 
@@ -132,19 +132,3 @@ def load_data():
         return import_dict
     except FileNotFoundError:
         print('No file found')
-
-
-# FIXME: Redundant code
-def to_file(data: Lib):
-    data_list = data.media
-    with open('data/data.txt', 'w') as f:
-        for elm in data_list:
-            print(repr(elm))
-            f.write(repr(elm) + '\n')
-
-
-# FIXME: Redundant code
-def from_file():
-    with open('data/data.txt', 'r') as f:
-        data_list = f.readlines()
-    return data_list
