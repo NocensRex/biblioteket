@@ -1,0 +1,18 @@
+book,d Book,f author,45,43.0,1567
+book,a Book,g author,23,123.0,2014
+book,h Book,b author,5,23.0,2019
+book,b Book,m author,6,98.0,2012
+book,i Book,d author,8,1.0,2015
+movie,good one,gustav,156,123.0,2019,10
+movie,decent one,davidsson,120,230.0,2015,7
+movie,eehh,matsumoto,99,98.0,2012,5
+movie,not good,gusten,56,43.0,2018,3
+movie,bad bad,god,66,666.0,2012,1
+cd,g cd,l artist,6,56,309.0
+cd,w cd,d artist,13,108,67.0
+cd,x cd,n artist,7,70,120.0
+cd,x cd,n artist,8,54,100.0
+cd,x cd,n artist,12,66,200.0
+cd,j cd,j artist,4,34,123.0
+cd,n cd,a artist,23,48,432.0
+cd,n cd,a artist,23,48,432.0
