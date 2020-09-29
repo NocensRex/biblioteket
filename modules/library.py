@@ -22,13 +22,6 @@ class Lib:
                 count = None
         return count
 
-    def __repr__(self):
-        return self.media
-
-    def __str__(self):
-        prod = "\n".join(self.media)
-        return prod
-
 
 class Media:
     subclasses = {}
