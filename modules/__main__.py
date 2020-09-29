@@ -9,7 +9,8 @@ class LibShell(cmd.Cmd):
     intro = '''
     Library Register V.1
     With this software all your indexing problems are fixed.
-    If you need help type "help"
+    If you need help type "help" for all the commands.
+    You can also typ "help introduction" for help on how to use me.
     '''
     prompt = '->'
 
@@ -48,11 +49,34 @@ class LibShell(cmd.Cmd):
         'Exit the Program'
         return True
 
+    def help_introduction(self):
+        print('''
+        Hi and welcome to this introduction
+
+        To begin with try and type "show", with this command
+        you will get a view of all the data in the library sorted
+        by title. If you want to sort by price type "show price"
+
+        If you want to add new media objects type "add"
+        and then chose the the media object you want to add
+        after that just type in what the prompt tells you.
+        ''')
+
     def populate(self, data):
+        """Populates the library with objects from a list
+
+        Args:
+            data (list): list of tuples
+        """
         for elm in data:
             self.my_library.media.append(Media.create(elm[0], elm[1]))
 
     def show(self, sort='title'):
+        """This will sort and present the data in library
+
+        Args:
+            sort (str, optional): decides by what value to sort after. Defaults to 'title'.
+        """
         books = []
         movies = []
         cds = []
@@ -60,13 +84,13 @@ class LibShell(cmd.Cmd):
             sort_index = 0
         elif sort == 'price':
             sort_index = 1
-        for x in self.my_library.media:
-            if x.mediatype == 'Book':
-                books.append((x.title, x.current_price, x))
-            if x.mediatype == 'Movie':
-                movies.append((x.title, x.current_price, x))
-            if x.mediatype == 'Music_CD':
-                cds.append((x.title, x.current_price, x))
+        for elm in self.my_library.media:
+            if elm.mediatype == 'Book':
+                books.append((elm.title, elm.current_price, elm))
+            if elm.mediatype == 'Movie':
+                movies.append((elm.title, elm.current_price, elm))
+            if elm.mediatype == 'Music_CD':
+                cds.append((elm.title, elm.current_price, elm))
         print('\nBooks')
         print('------------')
         print(''
@@ -107,12 +131,24 @@ class LibShell(cmd.Cmd):
 
 
 def parse(args):
+    """Convert a series of zero or more numbers to an argument tuple
+
+    Args:
+        args (str): string with arguments (cmd.Cmd module type)
+
+    Returns:
+        tuple: tuple of arguments
+    """
     print(args)
     return tuple(args.split())
 
 
 def add_media():
-    'Add an media object'
+    """Info to be used to create instance of object
+
+    Returns:
+        tuple: tuple with identifier and parameters
+    """
     print(
         '''What do you want to add
         1. Book

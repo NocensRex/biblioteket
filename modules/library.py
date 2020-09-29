@@ -4,10 +4,14 @@ from modules.utils import fixed_string
 
 
 class Lib:
+    """Creates the library object
+    """
     def __init__(self):
         self.media = []
 
     def update_prices(self):
+        """Updates prices of all objects in library
+        """
         for elm in self.media:
             if elm.NEED_DUPLICATES_AMOUNT:
                 elm.update_current_price(self.find_duplicates(elm))
@@ -15,6 +19,14 @@ class Lib:
                 elm.update_current_price()
 
     def find_duplicates(self, item):
+        """Find duplicates of object in list of objects
+
+        Args:
+            item (Media): Media object that you want to find duplicates of
+
+        Returns:
+            int: amount of duplicates found
+        """
         count = 0
         for elm in self.media:
             if item.NEED_DUPLICATES_AMOUNT:
@@ -26,6 +38,8 @@ class Lib:
 
 
 class Media:
+    """Creates the media object
+    """
     subclasses = {}
 
     def __init__(self, title, creator, purchase_price, purchase_year=None):
@@ -39,7 +53,14 @@ class Media:
             self.age = datetime.datetime.today().year - self.purchase_year
 
     def base_price(self, age=None) -> float:
-        'This will calculate the base value of an object'
+        """Calculates a base price based on the age of the object
+
+        Args:
+            age (int, optional): the age of the object. Defaults to None.
+
+        Returns:
+            float: the new base price of the object
+        """
         if age is not None:
             temp_age = age
         else:
@@ -73,6 +94,11 @@ class Media:
 
 @Media.register_subclass('book')
 class Book(Media):
+    """Creates the Book subclass of Media
+
+    Args:
+        Media (Class): parent class of Book
+    """
     mediatype = 'book'
     NEED_DUPLICATES_AMOUNT = False
 
@@ -81,7 +107,10 @@ class Book(Media):
         self.page_count = int(page_count)
 
     def update_current_price(self):
-        'This will recalculate the value of a book if it is older than 50 years'
+        """
+        Updates current price of this instance.
+        If it is older than 50 years the value increases
+        """
         price = self.purchase_price
         if self.age > 50:
             price = super().base_price(50)
@@ -92,7 +121,12 @@ class Book(Media):
             price = super().base_price()
             self.current_price = round(price, 2)
 
-    def save(self) -> list:
+    def save(self):
+        """Returns tuple of data to be sent to file
+
+        Returns:
+            tuple: the attributes that is needed to recreate this instance
+        """
         return Book.mediatype, self.title, self.creator, self.page_count, self.purchase_price, self.purchase_year
 
     def __str__(self):
@@ -111,6 +145,11 @@ class Book(Media):
 
 @Media.register_subclass('movie')
 class Movie(Media):
+    """Creates the Movie subclass of Media
+
+    Args:
+        Media (Class): parent class of Movie
+    """
     mediatype = 'movie'
     NEED_DUPLICATES_AMOUNT = False
 
@@ -120,12 +159,19 @@ class Movie(Media):
         self.degree_of_wear = int(degree_of_wear)
         self.update_current_price()
 
-    # FIXME: Double check this method
     def update_current_price(self):
-        'This will calculate the value of a movie based on the base value and degree of wear'
+        """
+        Updates current price of this instance.
+        The value is based on age and wear of the physical object
+        """
         self.current_price = round(super().base_price() * float(f'0.{self.degree_of_wear}'), 2)
 
-    def save(self) -> list:
+    def save(self):
+        """Returns tuple of data to be sent to file
+
+        Returns:
+            tuple: the attributes that is needed to recreate this instance
+        """
         return Movie.mediatype, self.title, self.creator, self.length, self.purchase_price, self.purchase_year, self.degree_of_wear
 
     def __str__(self):
@@ -145,6 +191,11 @@ class Movie(Media):
 
 @Media.register_subclass('cd')
 class Music_CD(Media):
+    """Creates the Music_CD subclass of Media
+
+    Args:
+        Media (Class): parent class of Music_CD
+    """
     mediatype = 'cd'
     NEED_DUPLICATES_AMOUNT = True
 
@@ -154,10 +205,18 @@ class Music_CD(Media):
         self.length = int(length)
 
     def update_current_price(self, amount=1):
-        'This will calculate the price of a cd object based on the amount of similar cds'
+        """
+        Updates current price of this instance.
+        The value is based on the amount of duplicates of this instance
+        """
         self.current_price = int(round(self.purchase_price / amount))
 
-    def save(self) -> list:
+    def save(self):
+        """Returns tuple of data to be sent to file
+
+        Returns:
+            tuple: the attributes that is needed to recreate this instance
+        """
         return Music_CD.mediatype, self.title, self.creator, self.track_count, self.length, self.purchase_price
 
     def __str__(self):
