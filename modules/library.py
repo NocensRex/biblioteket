@@ -1,6 +1,6 @@
 import datetime
 
-from modules.utils import str_sized
+from modules.utils import fixed_string
 
 
 class Lib:
@@ -97,12 +97,12 @@ class Book(Media):
 
     def __str__(self):
         return (''
-                + str_sized(self.title, 29).ljust(30)
-                + str_sized(self.creator, 29).rjust(30)
-                + str_sized(str(self.current_price), 15).rjust(16)
-                + str_sized(str(self.purchase_price), 15).rjust(16)
-                + str_sized(str(self.page_count), 11).rjust(12)
-                + str_sized(str(self.purchase_year), 14).rjust(15)
+                + fixed_string(self.title, 29).ljust(30)
+                + fixed_string(self.creator, 29).rjust(30)
+                + fixed_string(str(self.current_price), 15).rjust(16)
+                + fixed_string(str(self.purchase_price), 15).rjust(16)
+                + fixed_string(str(self.page_count), 11).rjust(12)
+                + fixed_string(str(self.purchase_year), 14).rjust(15)
                 )
 
     def __repr__(self):
@@ -130,13 +130,13 @@ class Movie(Media):
 
     def __str__(self):
         return (''
-                + str_sized(self.title, 29).ljust(30)
-                + str_sized(self.creator, 29).rjust(30)
-                + str_sized(str(self.current_price), 15).rjust(16)
-                + str_sized(str(self.purchase_price), 15).rjust(16)
-                + str_sized(str(self.length), 15).rjust(16)
-                + str_sized(str(self.purchase_year), 14).rjust(15)
-                + str_sized(str(self.degree_of_wear), 15).rjust(16)
+                + fixed_string(self.title, 29).ljust(30)
+                + fixed_string(self.creator, 29).rjust(30)
+                + fixed_string(str(self.current_price), 15).rjust(16)
+                + fixed_string(str(self.purchase_price), 15).rjust(16)
+                + fixed_string(str(self.length), 15).rjust(16)
+                + fixed_string(str(self.purchase_year), 14).rjust(15)
+                + fixed_string(str(self.degree_of_wear), 15).rjust(16)
                 )
 
     def __repr__(self):
@@ -162,12 +162,12 @@ class Music_CD(Media):
 
     def __str__(self):
         return (''
-                + str_sized(self.title, 29).ljust(30)
-                + str_sized(self.creator, 29).rjust(30)
-                + str_sized(str(self.current_price), 15).rjust(16)
-                + str_sized(str(self.purchase_price), 15).rjust(16)
-                + str_sized(str(self.track_count), 12).rjust(13)
-                + str_sized(str(self.length), 16).rjust(17)
+                + fixed_string(self.title, 29).ljust(30)
+                + fixed_string(self.creator, 29).rjust(30)
+                + fixed_string(str(self.current_price), 15).rjust(16)
+                + fixed_string(str(self.purchase_price), 15).rjust(16)
+                + fixed_string(str(self.track_count), 12).rjust(13)
+                + fixed_string(str(self.length), 16).rjust(17)
                 )
 
     def __repr__(self):

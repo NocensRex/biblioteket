@@ -2,7 +2,7 @@ import cmd
 
 from modules.library import Lib
 from modules.library import Media
-from modules.utils import load_from_csv, save_to_csv, str_sized
+from modules.utils import load_from_csv, save_to_csv, fixed_string
 
 
 class LibShell(cmd.Cmd):
@@ -68,37 +68,37 @@ class LibShell(cmd.Cmd):
         print('\nBooks')
         print('------------')
         print(''
-              + str_sized('Title', 29).ljust(30)
-              + str_sized('Author', 29).rjust(30)
-              + str_sized('Current Price', 15).rjust(16)
-              + str_sized('Purchase Price', 15).rjust(16)
-              + str_sized('Page Count', 11).rjust(12)
-              + str_sized('Purchase Year', 14).rjust(15))
+              + fixed_string('Title', 29).ljust(30)
+              + fixed_string('Author', 29).rjust(30)
+              + fixed_string('Current Price', 15).rjust(16)
+              + fixed_string('Purchase Price', 15).rjust(16)
+              + fixed_string('Page Count', 11).rjust(12)
+              + fixed_string('Purchase Year', 14).rjust(15))
         books = sorted(books, key=lambda x: x[sort_index])
         for book in books:
             print(book[2])
         print('\nMovies')
         print('------------')
         print(''
-              + str_sized('Title', 29).ljust(30)
-              + str_sized('Director', 29).rjust(30)
-              + str_sized('Current Price', 15).rjust(16)
-              + str_sized('Purchase Price', 15).rjust(16)
-              + str_sized('Length(minuts)', 15).rjust(16)
-              + str_sized('Purchase Year', 14).rjust(15)
-              + str_sized('Degree of wear', 15).rjust(16))
+              + fixed_string('Title', 29).ljust(30)
+              + fixed_string('Director', 29).rjust(30)
+              + fixed_string('Current Price', 15).rjust(16)
+              + fixed_string('Purchase Price', 15).rjust(16)
+              + fixed_string('Length(minuts)', 15).rjust(16)
+              + fixed_string('Purchase Year', 14).rjust(15)
+              + fixed_string('Degree of wear', 15).rjust(16))
         movies = sorted(movies, key=lambda x: x[sort_index])
         for movie in movies:
             print(movie[2])
         print('\nMusic CDs')
         print('------------')
         print(''
-              + str_sized('Title', 29).ljust(30)
-              + str_sized('Artist', 29).rjust(30)
-              + str_sized('Current Price', 15).rjust(16)
-              + str_sized('Purchase Price', 15).rjust(16)
-              + str_sized('Track Count', 12).rjust(13)
-              + str_sized('Length(minutes)', 16).rjust(17))
+              + fixed_string('Title', 29).ljust(30)
+              + fixed_string('Artist', 29).rjust(30)
+              + fixed_string('Current Price', 15).rjust(16)
+              + fixed_string('Purchase Price', 15).rjust(16)
+              + fixed_string('Track Count', 12).rjust(13)
+              + fixed_string('Length(minutes)', 16).rjust(17))
         cds = sorted(cds, key=lambda x: x[sort_index])
         for cd in cds:
             print(cd[2])

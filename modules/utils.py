@@ -1,20 +1,20 @@
 import csv
 
 
-def str_sized(string: str, lenth: int, end: str = ' ') -> str:
-    """Cuts off a long string to conform with `lenth`, replace the end of the string with `end` if provided.
+def fixed_string(string: str, length: int, end: str = ' ') -> str:
+    """Cuts off a long string to conform with `length`, replace the end of the string with `end` if provided.
     Args:
         string (str): the string to format
-        lenth (int): the max lenth of the string
+        length (int): the max length of the string
         end (str): replace the end of the cut string with `end`
     Returns:
         str: the formatted string
     """
-    lenth -= len(end)
-    if lenth <= 0 or len(string) <= lenth:
+    length -= len(end)
+    if length <= 0 or len(string) <= length:
         return string
     else:
-        return string[:lenth] + end
+        return string[:length] + end
 
 
 def save_to_csv(data):
