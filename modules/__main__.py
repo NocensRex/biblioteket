@@ -6,8 +6,11 @@ from modules.utils import load_from_csv, save_to_csv, fixed_string
 
 
 class LibShell(cmd.Cmd):
-    # TODO: Write more
-    intro = 'Welcome! Write more info here'
+    intro = '''
+    Library Register V.1
+    With this software all your indexing problems are fixed.
+    If you need help type "help"
+    '''
     prompt = '->'
 
     def preloop(self):
@@ -19,27 +22,26 @@ class LibShell(cmd.Cmd):
         save_to_csv(self.my_library.media)
 
     def do_add(self, arg):
+        'This will add a media object to the library.'
         obj = add_media()
         self.my_library.media.append(Media.create(obj[0], obj[1]))
         self.my_library.update_prices()
 
-    def do_update(self, arg):
-        self.my_library.update_prices()
-
     def do_save(self, arg):
+        'Manually save the data to "data/data.csv"'
         save_to_csv(self.my_library.media)
 
     def do_load(self, arg):
+        'Manually load the data from "data/data.csv"'
         self.populate(load_from_csv())
         self.my_library.update_prices()
 
-    def do_debug(self, arg):
-        save_to_csv(self.my_library.media)
-
-    def do_debug2(self, arg):
-        self.populate(load_from_csv())
-
     def do_show(self, arg):
+        '''
+        This will show all the objects in the library
+        Standard sort is by title, if you want to sort by
+        price type "show price"
+        '''
         self.show(*parse(arg))
 
     def do_quit(self, *arg):
