@@ -1,5 +1,7 @@
 import datetime
 
+from modules.utils import str_sized
+
 
 class Lib:
     def __init__(self):
@@ -94,7 +96,14 @@ class Book(Media):
         return Book.mediatype, self.title, self.creator, self.page_count, self.purchase_price, self.purchase_year
 
     def __str__(self):
-        return f'{self.mediatype}({self.title}, {self.creator}, {self.purchase_price}, {self.current_price}, {self.page_count}, {self.purchase_year},  {self.age})'
+        return (''
+                + str_sized(self.title, 29).ljust(30)
+                + str_sized(self.creator, 29).rjust(30)
+                + str_sized(str(self.current_price), 15).rjust(16)
+                + str_sized(str(self.purchase_price), 15).rjust(16)
+                + str_sized(str(self.page_count), 11).rjust(12)
+                + str_sized(str(self.purchase_year), 14).rjust(15)
+                )
 
     def __repr__(self):
         return f'{self.mediatype}(\"{self.title}\", \"{self.creator}\", {self.page_count}, {self.purchase_price}, {self.purchase_year})'
@@ -120,7 +129,15 @@ class Movie(Media):
         return Movie.mediatype, self.title, self.creator, self.length, self.purchase_price, self.purchase_year, self.degree_of_wear
 
     def __str__(self):
-        return f'{self.mediatype}({self.title}, {self.creator}, {self.purchase_price}, {self.current_price}, {self.length}, {self.purchase_year}, {self.age}, {self.degree_of_wear})'
+        return (''
+                + str_sized(self.title, 29).ljust(30)
+                + str_sized(self.creator, 29).rjust(30)
+                + str_sized(str(self.current_price), 15).rjust(16)
+                + str_sized(str(self.purchase_price), 15).rjust(16)
+                + str_sized(str(self.length), 15).rjust(16)
+                + str_sized(str(self.purchase_year), 14).rjust(15)
+                + str_sized(str(self.degree_of_wear), 15).rjust(16)
+                )
 
     def __repr__(self):
         return f'{self.mediatype}(\"{self.title}\", \"{self.creator}\", {self.length}, {self.purchase_price}, {self.purchase_year}, {self.degree_of_wear})'
@@ -144,7 +161,14 @@ class Music_CD(Media):
         return Music_CD.mediatype, self.title, self.creator, self.track_count, self.length, self.purchase_price
 
     def __str__(self):
-        return f'{self.mediatype}({self.title}, {self.creator}, {self.purchase_price}, {self.current_price}, {self.track_count},  {self.length})'
+        return (''
+                + str_sized(self.title, 29).ljust(30)
+                + str_sized(self.creator, 29).rjust(30)
+                + str_sized(str(self.current_price), 15).rjust(16)
+                + str_sized(str(self.purchase_price), 15).rjust(16)
+                + str_sized(str(self.track_count), 12).rjust(13)
+                + str_sized(str(self.length), 16).rjust(17)
+                )
 
     def __repr__(self):
         return f'{self.mediatype}(\"{self.title}\", \"{self.creator}\", {self.track_count}, {self.length}, {self.purchase_price})'

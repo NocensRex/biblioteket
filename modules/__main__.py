@@ -1,8 +1,8 @@
 import cmd
-import csv
 
 from modules.library import Lib
 from modules.library import Media
+from modules.utils import load_from_csv, save_to_csv, str_sized
 
 
 class LibShell(cmd.Cmd):
@@ -33,10 +33,10 @@ class LibShell(cmd.Cmd):
         self.populate(load_from_csv())
         self.my_library.update_prices()
 
-    def do_d(self, arg):
+    def do_debug(self, arg):
         save_to_csv(self.my_library.media)
 
-    def do_d2(self, arg):
+    def do_debug2(self, arg):
         self.populate(load_from_csv())
 
     def do_show(self, arg):
@@ -67,19 +67,38 @@ class LibShell(cmd.Cmd):
                 cds.append((x.title, x.current_price, x))
         print('\nBooks')
         print('------------')
-        print('mediatype, title, creator, purchase_price, current_price, page_count, purchase_year, age')
+        print(''
+              + str_sized('Title', 29).ljust(30)
+              + str_sized('Author', 29).rjust(30)
+              + str_sized('Current Price', 15).rjust(16)
+              + str_sized('Purchase Price', 15).rjust(16)
+              + str_sized('Page Count', 11).rjust(12)
+              + str_sized('Purchase Year', 14).rjust(15))
         books = sorted(books, key=lambda x: x[sort_index])
         for book in books:
             print(book[2])
         print('\nMovies')
         print('------------')
-        print('mediatype, title, creator, purchase_price, current_price, length, purchase_year, age, degree_of_wear')
+        print(''
+              + str_sized('Title', 29).ljust(30)
+              + str_sized('Director', 29).rjust(30)
+              + str_sized('Current Price', 15).rjust(16)
+              + str_sized('Purchase Price', 15).rjust(16)
+              + str_sized('Length(minuts)', 15).rjust(16)
+              + str_sized('Purchase Year', 14).rjust(15)
+              + str_sized('Degree of wear', 15).rjust(16))
         movies = sorted(movies, key=lambda x: x[sort_index])
         for movie in movies:
             print(movie[2])
         print('\nMusic CDs')
         print('------------')
-        print('mediatype, title, creator, purchase_price, current_price, track_count, length')
+        print(''
+              + str_sized('Title', 29).ljust(30)
+              + str_sized('Artist', 29).rjust(30)
+              + str_sized('Current Price', 15).rjust(16)
+              + str_sized('Purchase Price', 15).rjust(16)
+              + str_sized('Track Count', 12).rjust(13)
+              + str_sized('Length(minutes)', 16).rjust(17))
         cds = sorted(cds, key=lambda x: x[sort_index])
         for cd in cds:
             print(cd[2])
@@ -126,20 +145,3 @@ def add_media():
 
     else:
         print('You did not give an acceptable answer')
-
-
-def save_to_csv(data):
-    with open('data/data.csv', 'w', newline='') as f:
-        csv_out = csv.writer(f)
-        for row in data:
-            csv_out.writerow(row.save())
-
-
-def load_from_csv():
-    with open('data/data.csv', 'r', newline='') as f:
-        csv_in = csv.reader(f)
-        data = []
-        for row in csv_in:
-            data.append((row[0], row[1:]))
-
-    return data
