@@ -157,7 +157,7 @@ def add_media():
     choice = int(input('Make your choice: '))
     if choice == 1:
         print('\nAdding a Book')
-        title = input('Title: ')
+        title = input('Title: ').capitalize()
         author = input('Author: ')
         page_count = int(input('Page Count: '))
         purchase_price = float(input('Purchase Price: '))
@@ -165,7 +165,7 @@ def add_media():
         return ('book', [title, author, page_count, purchase_price, purchase_year])
     elif choice == 2:
         print('\nAdding a movie')
-        title = input('Title: ')
+        title = input('Title: ').capitalize()
         director = input('Director: ')
         length = int(input('Length in minutes: '))
         purchase_price = float(input('Purchase Price: '))
@@ -174,7 +174,7 @@ def add_media():
         return ('movie', [title, director, length, purchase_price, purchase_year, degree_of_wear])
     elif choice == 3:
         print('\nAdding a music cd')
-        title = input('Title: ')
+        title = input('Title: ').capitalize()
         artist = input('Artist: ')
         track_count = int(input('Track Count: '))
         length = int(input('Length in minutes: '))
