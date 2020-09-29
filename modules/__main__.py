@@ -1,5 +1,5 @@
 import cmd
-import json
+import csv
 
 from modules.library import Lib
 from modules.library import Media
@@ -12,11 +12,11 @@ class LibShell(cmd.Cmd):
 
     def preloop(self):
         self.my_library = Lib()
-        # self.populate_from_json()
+        self.populate(load_from_csv())
+        self.my_library.update_prices()
 
     def postloop(self):
-        # save_data(self.my_library.to_dict())
-        pass
+        save_to_csv(self.my_library.media)
 
     def do_add(self, arg):
         obj = add_media()
@@ -27,54 +27,62 @@ class LibShell(cmd.Cmd):
         self.my_library.update_prices()
 
     def do_save(self, arg):
-        save_data(self.my_library.to_dict())
+        save_to_csv(self.my_library.media)
 
     def do_load(self, arg):
-        self.populate_from_json()
+        self.populate(load_from_csv())
         self.my_library.update_prices()
 
     def do_d(self, arg):
-        pass
+        save_to_csv(self.my_library.media)
+
+    def do_d2(self, arg):
+        self.populate(load_from_csv())
 
     def do_show(self, arg):
-        self.my_library.show(*parse(arg))
+        self.show(*parse(arg))
 
     def do_quit(self, *arg):
         'Exit the Program'
         return True
 
-    # FIXME:
-    def populate_from_json(self):
-        'This function populates the library'
-        data = load_data()
-        for key in data:
-            for row in data[key]:
-                if key == 'books':
-                    self.my_library.add_media(['b',
-                                              row['title'],
-                                              row['creator'],
-                                              row['page_count'],
-                                              row['purchase_price'],
-                                              row['purchase_year']])
-                elif key == 'movies':
-                    self.my_library.add_media(['m',
-                                              row['title'],
-                                              row['creator'],
-                                              row['length'],
-                                              row['purchase_price'],
-                                              row['purchase_year'],
-                                              row['degree_of_wear']])
-                elif key == 'music_cds':
-                    self.my_library.add_media(['c',
-                                              row['title'],
-                                              row['creator'],
-                                              row['track_count'],
-                                              row['length'],
-                                              row['purchase_price']])
+    def populate(self, data):
+        for elm in data:
+            self.my_library.media.append(Media.create(elm[0], elm[1]))
 
-
-    def new_populate(self):
-        self.my_library.media.append(Media.create(data1, data2))
+    def show(self, sort='title'):
+        books = []
+        movies = []
+        cds = []
+        if sort == 'title':
+            sort_index = 0
+        elif sort == 'price':
+            sort_index = 1
+        for x in self.my_library.media:
+            if x.mediatype == 'Book':
+                books.append((x.title, x.current_price, x))
+            if x.mediatype == 'Movie':
+                movies.append((x.title, x.current_price, x))
+            if x.mediatype == 'Music_CD':
+                cds.append((x.title, x.current_price, x))
+        print('\nBooks')
+        print('------------')
+        print('mediatype, title, creator, purchase_price, current_price, page_count, purchase_year, age')
+        books = sorted(books, key=lambda x: x[sort_index])
+        for book in books:
+            print(book[2])
+        print('\nMovies')
+        print('------------')
+        print('mediatype, title, creator, purchase_price, current_price, length, purchase_year, age, degree_of_wear')
+        movies = sorted(movies, key=lambda x: x[sort_index])
+        for movie in movies:
+            print(movie[2])
+        print('\nMusic CDs')
+        print('------------')
+        print('mediatype, title, creator, purchase_price, current_price, track_count, length')
+        cds = sorted(cds, key=lambda x: x[sort_index])
+        for cd in cds:
+            print(cd[2])
 
 
 def parse(args):
@@ -120,15 +128,18 @@ def add_media():
         print('You did not give an acceptable answer')
 
 
-def save_data(data):
-    with open('data/data.json', 'w', encoding='utf8') as f:
-        json.dump(data, f, indent=4, sort_keys=True)
+def save_to_csv(data):
+    with open('data/data.csv', 'w', newline='') as f:
+        csv_out = csv.writer(f)
+        for row in data:
+            csv_out.writerow(row.save())
 
 
-def load_data():
-    try:
-        with open('data/data.json', 'r') as f:
-            import_dict = json.load(f)
-        return import_dict
-    except FileNotFoundError:
-        print('No file found')
+def load_from_csv():
+    with open('data/data.csv', 'r', newline='') as f:
+        csv_in = csv.reader(f)
+        data = []
+        for row in csv_in:
+            data.append((row[0], row[1:]))
+
+    return data
