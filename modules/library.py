@@ -18,6 +18,9 @@ class Lib:
             else:
                 elm.update_current_price()
 
+    def append_media(self, media_object):
+        self.media.append(media_object)
+
     def find_duplicates(self, item):
         """Find duplicates of object in list of objects
 
@@ -99,7 +102,6 @@ class Book(Media):
     Args:
         Media (Class): parent class of Book
     """
-    mediatype = 'book'
     NEED_DUPLICATES_AMOUNT = False
 
     def __init__(self, title, author, page_count, purchase_price, purchase_year):
@@ -150,7 +152,6 @@ class Movie(Media):
     Args:
         Media (Class): parent class of Movie
     """
-    mediatype = 'movie'
     NEED_DUPLICATES_AMOUNT = False
 
     def __init__(self, title, director, length, purchase_price, purchase_year, degree_of_wear):
@@ -196,7 +197,6 @@ class Music_CD(Media):
     Args:
         Media (Class): parent class of Music_CD
     """
-    mediatype = 'cd'
     NEED_DUPLICATES_AMOUNT = True
 
     def __init__(self, title, artist, track_count, length, purchase_price):

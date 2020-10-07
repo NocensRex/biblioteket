@@ -25,7 +25,7 @@ class LibShell(cmd.Cmd):
     def do_add(self, arg):
         'This will add a media object to the library.'
         obj = add_media()
-        self.my_library.media.append(Media.create(obj[0], obj[1]))
+        self.my_library.append_media(Media.create(obj[0], obj[1]))
         self.my_library.update_prices()
 
     def do_save(self, arg):
@@ -69,7 +69,7 @@ class LibShell(cmd.Cmd):
             data (list): list of tuples
         """
         for elm in data:
-            self.my_library.media.append(Media.create(elm[0], elm[1]))
+            self.my_library.append_media(Media.create(obj[0], obj[1]))
 
     def show(self, sort='title'):
         """This will sort and present the data in library
